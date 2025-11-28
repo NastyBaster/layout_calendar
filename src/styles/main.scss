@@ -1,0 +1,41 @@
+@import '../styles/variables.scss';
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+.calendar {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  gap: $gap;
+
+  &__week {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    align-self: center;
+    gap: $gap;
+  }
+
+  &__day {
+    background-color: $gray;
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    position: relative;
+    transition: transform 500ms;
+    &::before {
+      content: '1';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translate(20px);
+    }
+  }
+}
