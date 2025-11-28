@@ -1,37 +1,5 @@
 @import 'variables';
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.calendar {
-  display: grid;
-  align-self: center;
-  flex-direction: column;
-  grid-template-columns: repeat(7, 100px);
-  gap: $gap-size;
-
-  &__day {
-    background-color: $gray;
-    box-sizing: border-box;
-    height: $day-size;
-    width: $day-size;
-    border: 1px solid black;
-    position: relative;
-    transition: transform 500ms;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $pink;
-      transform: translateY(-20px);
-    }
-  }
-}
-
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i}) {
     &::before {
@@ -41,6 +9,43 @@ body {
       left: 50%;
       font-family: Arial, sans-serif;
       font-size: 30px;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat($days-in-week, $day-size);
+  gap: $gap-size;
+  padding: $padding;
+
+  &__day {
+    background-color: $gray;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: 1px solid black;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    transition:
+      background-color 0.5s,
+      transform 0.5s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translateY(-20px);
+      // pointer-events: none;
     }
   }
 }
