@@ -3,40 +3,44 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar {
-  display: flex;
+  display: grid;
   align-self: center;
   flex-direction: column;
-  gap: $gap;
-
-  &__week {
-    display: flex;
-    place-self: center;
-    flex-direction: row;
-    gap: $gap;
-  }
+  grid-template-columns: repeat(7, 100px);
+  gap: $gap-size;
 
   &__day {
     background-color: $gray;
     box-sizing: border-box;
-    height: 100px;
-    width: 100px;
+    height: $day-size;
+    width: $day-size;
     border: 1px solid black;
     position: relative;
     transition: transform 500ms;
-    &::before {
-      content: '1';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    }
 
     &:hover {
       cursor: pointer;
       background-color: $pink;
-      transform: translate(20px);
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    &::before {
+      content: '#{$i}';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
     }
   }
 }
