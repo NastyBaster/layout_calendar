@@ -1,6 +1,6 @@
 @import 'variables';
 
-@for $i from 1 through 31 {
+@for $i from 1 through 42 {
   .calendar__day:nth-child(#{$i}) {
     &::before {
       content: '#{$i}';
@@ -10,6 +10,33 @@
       font-family: Arial, sans-serif;
       font-size: 30px;
       transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
+$start-days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+@each $day, $index in $start-days {
+  .calendar--start-day-#{$day} {
+    // Застосовуємо grid-column-start до ПЕРШОГО елемента
+    .calendar__day:nth-child(1) {
+      grid-column-start: $index;
     }
   }
 }
@@ -45,6 +72,7 @@ body {
       cursor: pointer;
       background-color: $pink;
       transform: translateY(-20px);
+
       // pointer-events: none;
     }
   }
